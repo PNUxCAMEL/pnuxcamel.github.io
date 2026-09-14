@@ -1,5 +1,10 @@
 # CAMEL Lab 홈페이지 (정적 HTML 버전)
 
+🌐 **홈페이지: https://pnuxcamel.github.io**
+
+- 사진 저장소: https://github.com/PNUxCAMEL/camel-lab-images (멤버·프로젝트 사진, `gallery/` 폴더에 갤러리 앨범)
+- 연구실 GitHub: https://github.com/PNUxCAMEL
+
 Oopy(노션) 사이트의 내용을 그대로 옮긴 순수 HTML/CSS/JS 사이트입니다.
 서버·데이터베이스가 없으므로 **GitHub Pages에 올리면 무료로 운영**할 수 있습니다.
 

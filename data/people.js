@@ -48,7 +48,7 @@ window.STUDENTS = [
   { name: "Taegun Hwang",  degree: "M.S. course",  topics: ["Robot Learning and Control", "Robot Design and Mechatronics"], email: "htq1719@naver.com", photo: IMG + "TaegunHwang.png" + RAW },
   { name: "Minseong Kim",  degree: "M.S. course",  topics: ["Locomotion Control", "State Estimation"],                email: "matize1115@pusan.ac.kr",  photo: IMG + "MinseongKim.JPG" + RAW },
   { name: "Chanwoo Jeong", degree: "M.S. course",  topics: ["Imitation Learning", "Manipulation"],                    email: "cksdn57@pusan.ac.kr",     photo: IMG + "ChanwooJeong.png" + RAW },
-  { name: "Yoonji Jang",   degree: "M.S. course",  topics: ["Learning-based Locomotion", "Control and System Identification"], email: "gefeum@pusan.ac.kr", photo: IMG + "YoonjiJang.jpg" + RAW },
+  { name: "Yoonji Jang",   degree: "M.S. course",  topics: ["Learning-based Locomotion", "Control and System Identification"], email: "gefeum@pusan.ac.kr", photo: IMG + "YunjiJang.png" + RAW },
   { name: "Yunho Lee",     degree: "M.S. course",  topics: ["Mechanical Design", "Reinforcement Learning"],           email: "dldbsgh8408@naver.com",   photo: IMG + "YunhoLee.jpg" + RAW },
   { name: "Junju Park",    degree: "M.S. course",  topics: ["Dexterous Manipulation", "Reinforcement Learning"],      email: "bjj5218@pusan.ac.kr",     photo: IMG + "JunjuPark.jpg" + RAW },
   { name: "Jintae Kim",    degree: "M.S. course",  topics: ["Mechanical Design", "Humanoid"],                    email: "jintae2001@naver.com",    photo: IMG + "JintaeKim.png" + RAW },

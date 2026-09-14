@@ -116,7 +116,7 @@ main{padding:48px 0 80px}
 .tag[data-kind="Project"]{color:#1e6b3a;border-color:#c3e3cf;background:#eefaf2}
 .tag[data-kind="Patent"]{color:#6d3aa8;border-color:#dccff0;background:#f6f1fc}
 .tag[data-kind="Lab"]{color:#555;background:#f5f5f5}
-.lang-links{font-size:14px;font-weight:600;margin-left:14px;letter-spacing:.02em;vertical-align:2px}
+.lang-links{font-size:14px;font-weight:600;letter-spacing:.02em}
 .lang-links a{color:#8fbde8;padding:2px 3px}
 .lang-links a:hover{color:var(--blue);text-decoration:none}
 .lang-links a[aria-current="true"]{color:var(--blue);border-bottom:2px solid var(--blue)}

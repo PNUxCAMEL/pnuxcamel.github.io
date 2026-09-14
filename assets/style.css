@@ -176,6 +176,7 @@ main{padding:48px 0 80px}
 
 /* ===== GALLERY ===== */
 .gallery-group{margin-top:44px}
+.gallery-group:first-child{margin-top:0}
 .gallery-group h2{font-size:22px;margin-bottom:18px}
 .album-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 @media (max-width:900px){.album-grid{grid-template-columns:repeat(2,1fr)}}
@@ -186,7 +187,7 @@ main{padding:48px 0 80px}
 .album:hover img{opacity:.92}
 .album-title{font-weight:600;margin-top:10px}
 .album-count{font-size:13px;color:var(--muted)}
-.back{margin:-24px 0 24px;font-size:15px}
+.back{margin:0 0 20px;font-size:15px}
 .album-section{font-size:19px;margin:36px 0 14px}
 .photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
 @media (max-width:900px){.photo-grid{grid-template-columns:repeat(2,1fr)}}

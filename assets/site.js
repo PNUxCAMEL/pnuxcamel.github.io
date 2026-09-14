@@ -71,16 +71,21 @@
   const newsEl = $("#news-list");
   if (newsEl && window.NEWS) {
     const LIMIT = 8;
-    let lang = "en", showAll = false;
+    let lang = location.hash === "#news-ko" ? "ko" : "en", showAll = false;
     const render = () => {
       const rows = showAll ? NEWS : NEWS.slice(0, LIMIT);
       newsEl.innerHTML = rows.map(n => `<li><span class="date">${esc(n.date)}</span><span class="tag" data-kind="${esc(n.kind)}">${esc(n.kind)}</span><span class="text">${esc(lang === "ko" && n.ko ? n.ko : n.text)}</span></li>`).join("");
       const more = $("#news-more");
       if (more) { more.style.display = showAll || NEWS.length <= LIMIT ? "none" : ""; }
-      document.querySelectorAll("#news-lang button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === lang));
+      document.querySelectorAll("#news-lang a").forEach(a => a.setAttribute("aria-current", a.dataset.lang === lang));
     };
     $("#news-more button")?.addEventListener("click", () => { showAll = true; render(); });
-    $("#news-lang")?.addEventListener("click", e => { const b = e.target.closest("button"); if (b) { lang = b.dataset.lang; render(); } });
+    $("#news-lang")?.addEventListener("click", e => {
+      const a = e.target.closest("a"); if (!a) return;
+      e.preventDefault(); lang = a.dataset.lang;
+      history.replaceState(null, "", lang === "ko" ? "#news-ko" : location.pathname);
+      render();
+    });
     render();
   }
 

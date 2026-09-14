@@ -47,9 +47,33 @@
     footer.className = "site-footer";
     footer.innerHTML = `
       <div class="wrap">
-        <span>© ${new Date().getFullYear()} Computer and Machine Engaged Lab, Pusan National University</span>
-        <span><a href="https://github.com/PNUxCAMEL" target="_blank" rel="noopener">GitHub</a> &nbsp;·&nbsp; <a href="https://www.youtube.com/@camelxpnu5348" target="_blank" rel="noopener">YouTube</a></span>
+        <div>
+          <div class="f-brand">CAMEL Lab <small>Computer and Machine Engaged Lab · Pusan National University</small></div>
+          <ul>
+            <li>Busandaehak-ro 63beon-gil 2, Geumjeong-gu, Busan 46241, Korea</li>
+            <li><a href="mailto:inholee8@pusan.ac.kr">inholee8@pusan.ac.kr</a> · +82-51-510-2444</li>
+          </ul>
+        </div>
+        <div>
+          <h5>Lab</h5>
+          <ul><li><a href="people.html">People</a></li><li><a href="research.html">Research</a></li><li><a href="projects.html">Projects</a></li><li><a href="publications.html">Publications</a></li></ul>
+        </div>
+        <div>
+          <h5>Links</h5>
+          <ul><li><a href="https://github.com/PNUxCAMEL" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://www.youtube.com/@camelxpnu5348" target="_blank" rel="noopener">YouTube</a></li><li><a href="https://openpath-robotics.com/" target="_blank" rel="noopener">OpenPath Robotics</a></li><li><a href="contact.html">Contact</a></li></ul>
+        </div>
+        <div class="copy">© ${new Date().getFullYear()} Computer and Machine Engaged Lab, Pusan National University</div>
       </div>`;
+  }
+
+  /* ---- stats strip (home) ---- */
+  const statsEl = $("#stats");
+  if (statsEl) {
+    const members = (window.STUDENTS || []).length + 1;
+    const pubs = (window.PUBLICATIONS || []).length;
+    const projects = (window.PROJECTS || []).length;
+    const items = [["2020", "Founded"], [members, "Members"], [pubs, "Publications"], [projects, "Projects"]];
+    statsEl.innerHTML = items.map(([n, l]) => `<li><b>${n}</b><span>${l}</span></li>`).join("");
   }
 
   /* ---- slider (home) ---- */
@@ -67,7 +91,7 @@
     go(0); start();
   }
 
-  /* ---- news (home) — EN / KO toggle ---- */
+  /* ---- news (home) — ENG / KOR ---- */
   const newsEl = $("#news-list");
   if (newsEl && window.NEWS) {
     const LIMIT = 8;
@@ -76,7 +100,7 @@
       const rows = showAll ? NEWS : NEWS.slice(0, LIMIT);
       newsEl.innerHTML = rows.map(n => `<li><span class="date">${esc(n.date)}</span><span class="tag" data-kind="${esc(n.kind)}">${esc(n.kind)}</span><span class="text">${esc(lang === "ko" && n.ko ? n.ko : n.text)}</span></li>`).join("");
       const more = $("#news-more");
-      if (more) { more.style.display = showAll || NEWS.length <= LIMIT ? "none" : ""; }
+      if (more) more.style.display = showAll || NEWS.length <= LIMIT ? "none" : "";
       document.querySelectorAll("#news-lang a").forEach(a => a.setAttribute("aria-current", a.dataset.lang === lang));
     };
     $("#news-more button")?.addEventListener("click", () => { showAll = true; render(); });

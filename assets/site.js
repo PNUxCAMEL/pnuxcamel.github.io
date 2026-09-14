@@ -7,7 +7,8 @@
   const page = document.body.dataset.page || "";
   // 상단 메뉴 구조: [상위 메뉴, 링크, 페이지키, 하위 메뉴들]
   const MENU = [
-    ["Home", "index.html", "home", [["People", "people.html", "people"]]],
+    ["Home", "index.html", "home", []],
+    ["People", "people.html", "people", []],
     ["Research", "research.html", "research", [["Project", "projects.html", "projects"], ["Publication", "publications.html", "publications"]]],
     ["Gallery", "gallery.html", "gallery", []],
     ["Contact", "contact.html", "contact", []],
@@ -183,7 +184,7 @@
     const lead = $("#gallery-lead"), title = $("#gallery-title");
 
     const renderIndex = () => {
-      title.textContent = "Gallery"; if (lead) lead.style.display = "";
+      title.textContent = "Gallery";
       galEl.innerHTML = GALLERY.map(g => `
         <section class="gallery-group">
           <h2>${esc(g.group)}</h2>
@@ -201,7 +202,7 @@
 
     let photos = [];
     const renderAlbum = (a) => {
-      title.textContent = a.title; if (lead) lead.style.display = "none";
+      title.textContent = a.title;
       photos = a.sections.flatMap(s => s.images.map(f => ({ big: thumb(url(a, f), 1800), raw: url(a, f) })));
       let i = 0;
       galEl.innerHTML = `

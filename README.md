@@ -18,8 +18,9 @@ projects.html       프로젝트
 publications.html   논문
 gallery.html        갤러리
 contact.html        연락처
+assets/logo.png     상단 로고 (이 이름으로 넣으면 자동 표시, 없으면 글자 로고)
 assets/style.css    디자인 (전 페이지 공통)
-assets/site.js      메뉴·슬라이드·목록 렌더링 (수정할 일 거의 없음)
+assets/site.js      메뉴·슬라이드·목록 렌더링 (상단 메뉴 구조는 이 파일 맨 위 MENU에서 수정)
 data/               ★ 내용은 전부 여기서 수정합니다
   news.js           뉴스
   people.js         교수·학생·졸업생

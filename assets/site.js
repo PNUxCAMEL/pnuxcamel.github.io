@@ -5,26 +5,36 @@
 
   /* ---- header / footer ---- */
   const page = document.body.dataset.page || "";
-  const links = [
-    ["index.html", "Home", "home"],
-    ["people.html", "People", "people"],
-    ["research.html", "Research", "research"],
-    ["projects.html", "Projects", "projects"],
-    ["publications.html", "Publications", "publications"],
-    ["gallery.html", "Gallery", "gallery"],
-    ["contact.html", "Contact", "contact"],
+  // 상단 메뉴 구조: [상위 메뉴, 링크, 페이지키, 하위 메뉴들]
+  const MENU = [
+    ["Home", "index.html", "home", [["People", "people.html", "people"]]],
+    ["Research", "research.html", "research", [["Project", "projects.html", "projects"], ["Publication", "publications.html", "publications"]]],
+    ["Gallery", "gallery.html", "gallery", []],
+    ["Contact", "contact.html", "contact", []],
   ];
   const header = $("#site-header");
   if (header) {
     header.className = "site-header";
     header.innerHTML = `
       <div class="wrap">
-        <a class="brand" href="index.html">CAMEL Lab <small>Pusan National University</small></a>
+        <a class="brand" href="index.html" aria-label="CAMEL Lab home">
+          <img class="brand-logo" src="assets/logo.png" alt="CAMEL — Computer And Machine Engaged Laboratory">
+          <span class="brand-text">CAMEL <small>Computer And Machine Engaged Lab</small></span>
+        </a>
         <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">Menu</button>
         <nav class="nav" aria-label="Main">
-          ${links.map(([href, label, key]) => `<a href="${href}" ${key === page ? 'aria-current="page"' : ""}>${label}</a>`).join("")}
+          ${MENU.map(([label, href, key, subs]) => {
+            const active = key === page || subs.some(s => s[2] === page);
+            return `<div class="nav-item${subs.length ? " has-sub" : ""}">
+              <a href="${href}" ${active ? 'aria-current="page"' : ""}>${label}</a>
+              ${subs.length ? `<div class="sub">${subs.map(([l, h, k]) => `<a href="${h}" ${k === page ? 'aria-current="page"' : ""}>${l}</a>`).join("")}</div>` : ""}
+            </div>`;
+          }).join("")}
         </nav>
       </div>`;
+    const logo = $(".brand-logo", header);
+    logo.addEventListener("error", () => header.classList.add("no-logo"), { once: true });
+    if (logo.complete && logo.naturalWidth === 0) header.classList.add("no-logo");
     const btn = $(".nav-toggle", header), nav = $(".nav", header);
     btn.addEventListener("click", () => {
       const open = nav.classList.toggle("open");
@@ -75,31 +85,32 @@
   if (profEl && window.PROFESSOR) {
     const P = PROFESSOR;
     const list = (arr) => arr.map(([a, b]) => `<li><span>${esc(a)}</span><span>${esc(b)}</span></li>`).join("");
+    profEl.className = "card professor";
     profEl.innerHTML = `
       <img src="${P.photo}" alt="${esc(P.name)}">
       <div>
-        <h3>${esc(P.name)}</h3>
-        <p class="role">${esc(P.role)}</p>
-        <p class="contact"><a href="mailto:${P.email}">${P.email}</a><br>${esc(P.address)}</p>
-        <div class="cv">
-          <div><h4>Career</h4><ul>${list(P.career)}</ul></div>
-          <div><h4>Honors</h4><ul>${list(P.honors)}</ul></div>
-          <div><h4>Grants</h4><ul>${list(P.grants)}</ul></div>
-        </div>
+        <h3 class="name">${esc(P.name)}</h3>
+        <p class="position">${esc(P.role)}</p>
+        <p class="contact">✉️ <a href="mailto:${P.email}">${P.email}</a><br>📍 ${esc(P.address)}</p>
+        <h4>Career</h4><ul>${list(P.career)}</ul>
+        <h4>Honors &amp; Grants</h4><ul>${list(P.honors)}</ul>
+        <h4>Projects</h4><ul>${list(P.grants)}</ul>
       </div>`;
   }
-  const personCard = (s) => `
-    <div class="person">
-      <img src="${s.photo}" alt="${esc(s.name)}" loading="lazy">
-      <div class="name">${esc(s.name)}</div>
-      <div class="deg">${esc(s.degree)}</div>
-      <div class="topics">${s.topics.map(esc).join(" · ")}</div>
-      <a class="mail" href="mailto:${s.email}">${esc(s.email)}</a>
+  const memberCard = (s) => `
+    <div class="card member">
+      <img src="${s.photo || PLACEHOLDER}" alt="${esc(s.name)}" loading="lazy">
+      <div class="info">
+        <p class="name">${esc(s.name)}</p>
+        <p class="degree">${esc(s.degree)}</p>
+        <ul class="tags">${s.topics.map(t => `<li>${esc(t)}</li>`).join("")}</ul>
+        <div class="email">✉️ <a href="mailto:${s.email}">${esc(s.email)}</a></div>
+      </div>
     </div>`;
   const fillGroup = (id, pred) => {
     const el = $(id); if (!el || !window.STUDENTS) return;
     const rows = STUDENTS.filter(pred);
-    el.innerHTML = rows.map(personCard).join("");
+    el.innerHTML = rows.map(memberCard).join("");
     const c = $(id + "-count"); if (c) c.textContent = rows.length;
   };
   fillGroup("#grad", s => /Ph\.D|M\.S/i.test(s.degree));
@@ -107,11 +118,16 @@
   const alEl = $("#alumni");
   if (alEl && window.ALUMNI) {
     alEl.innerHTML = ALUMNI.map(a => `
-      <div class="person">
+      <div class="card member">
         <img src="${a.photo || PLACEHOLDER}" alt="${esc(a.name)}" loading="lazy">
-        <div class="name">${esc(a.name)}</div>
-        <div class="deg">${esc(a.degree)}${a.year ? (/Candidate/.test(a.degree) ? "" : " Graduate") + " · " + esc(a.year) : ""}</div>
-        ${a.employment ? `<div class="topics">${esc(a.employment)}</div>` : ""}
+        <div class="info">
+          <p class="name">${esc(a.name)}</p>
+          <p class="degree">${esc(a.degree)}${/Candidate/.test(a.degree) ? "" : " Graduate"}</p>
+          <div class="employment">
+            ${a.year ? `<span>Graduation Year:</span> ${esc(a.year)}<br>` : ""}
+            ${a.employment ? `<span>${/CAMEL/.test(a.employment) ? "Current Position" : "Employment"}:</span> ${esc(a.employment)}` : ""}
+          </div>
+        </div>
       </div>`).join("");
     const c = $("#alumni-count"); if (c) c.textContent = ALUMNI.length;
   }

@@ -8,6 +8,7 @@
   const links = [
     ["index.html", "Home", "home"],
     ["people.html", "People", "people"],
+    ["research.html", "Research", "research"],
     ["projects.html", "Projects", "projects"],
     ["publications.html", "Publications", "publications"],
     ["gallery.html", "Gallery", "gallery"],
@@ -105,7 +106,13 @@
   fillGroup("#undergrad", s => /B\.S/i.test(s.degree));
   const alEl = $("#alumni");
   if (alEl && window.ALUMNI) {
-    alEl.innerHTML = ALUMNI.map(a => `<li><span class="name">${esc(a.name)}</span> <span class="meta">${esc(a.degree)}${a.year ? " " + esc(a.year) : ""}${a.employment ? " — " + esc(a.employment) : ""}</span></li>`).join("");
+    alEl.innerHTML = ALUMNI.map(a => `
+      <div class="person">
+        <img src="${a.photo || PLACEHOLDER}" alt="${esc(a.name)}" loading="lazy">
+        <div class="name">${esc(a.name)}</div>
+        <div class="deg">${esc(a.degree)}${a.year ? (/Candidate/.test(a.degree) ? "" : " Graduate") + " · " + esc(a.year) : ""}</div>
+        ${a.employment ? `<div class="topics">${esc(a.employment)}</div>` : ""}
+      </div>`).join("");
     const c = $("#alumni-count"); if (c) c.textContent = ALUMNI.length;
   }
 
@@ -147,15 +154,80 @@
     renderPubs("ALL");
   }
 
-  /* ---- gallery ---- */
+  /* ---- gallery: album cards -> album view -> lightbox ---- */
   const galEl = $("#gallery");
   if (galEl && window.GALLERY) {
-    galEl.innerHTML = GALLERY.map(g => `
-      <section class="gallery-group">
-        <h2>${esc(g.group)}</h2>
-        <div class="gallery-grid">
-          ${g.items.map(it => `<figure><img src="${it.image}" alt="${esc(it.caption)}" loading="lazy"><figcaption>${esc(it.caption)}</figcaption></figure>`).join("")}
-        </div>
-      </section>`).join("");
+    const url = (a, f) => GALLERY_BASE + encodeURIComponent(a.folder) + "/" + encodeURIComponent(f);
+    // 화면용 축소본: 무료 이미지 리사이즈 서비스(wsrv.nl)로 작게 불러오고, 실패하면 원본으로 대체
+    const thumb = (u, w, h) => `https://wsrv.nl/?url=${encodeURIComponent(u)}&w=${w}${h ? `&h=${h}&fit=cover` : ""}&output=jpg&q=80`;
+    const withFallback = (root) => root.querySelectorAll("img[data-raw]").forEach(img =>
+      img.addEventListener("error", () => { img.src = img.dataset.raw; }, { once: true }));
+    const count = (a) => a.sections.reduce((n, s) => n + s.images.length, 0);
+    const allAlbums = GALLERY.flatMap(g => g.albums);
+    const lead = $("#gallery-lead"), title = $("#gallery-title");
+
+    const renderIndex = () => {
+      title.textContent = "Gallery"; if (lead) lead.style.display = "";
+      galEl.innerHTML = GALLERY.map(g => `
+        <section class="gallery-group">
+          <h2>${esc(g.group)}</h2>
+          <div class="album-grid">
+            ${g.albums.map(a => `
+              <a class="album" href="#${a.id}">
+                <img src="${thumb(url(a, a.cover), 640, 480)}" data-raw="${url(a, a.cover)}" alt="" loading="lazy">
+                <div class="album-title">${esc(a.title)}</div>
+                <div class="album-count">${count(a)} photos</div>
+              </a>`).join("")}
+          </div>
+        </section>`).join("");
+      withFallback(galEl);
+    };
+
+    let photos = [];
+    const renderAlbum = (a) => {
+      title.textContent = a.title; if (lead) lead.style.display = "none";
+      photos = a.sections.flatMap(s => s.images.map(f => ({ big: thumb(url(a, f), 1800), raw: url(a, f) })));
+      let i = 0;
+      galEl.innerHTML = `
+        <p class="back"><a href="#">← All albums</a></p>
+        ${a.sections.map(s => `
+          ${s.heading ? `<h2 class="album-section">${esc(s.heading)}</h2>` : ""}
+          <div class="photo-grid">
+            ${s.images.map(f => `<button class="photo" data-i="${i++}" type="button"><img src="${thumb(url(a, f), 480, 360)}" data-raw="${url(a, f)}" alt="" loading="lazy"></button>`).join("")}
+          </div>`).join("")}`;
+      withFallback(galEl);
+      galEl.querySelectorAll(".photo").forEach(b => b.addEventListener("click", () => openLightbox(+b.dataset.i)));
+      window.scrollTo(0, 0);
+    };
+
+    /* lightbox */
+    const lb = document.createElement("div");
+    lb.className = "lightbox"; lb.hidden = true;
+    lb.innerHTML = `<button class="lb-close" aria-label="Close">×</button><button class="lb-prev" aria-label="Previous">‹</button><img alt=""><button class="lb-next" aria-label="Next">›</button><div class="lb-count"></div>`;
+    document.body.appendChild(lb);
+    let cur = 0;
+    const lbImg = $("img", lb);
+    lbImg.addEventListener("error", () => { if (photos[cur] && lbImg.src !== photos[cur].raw) lbImg.src = photos[cur].raw; });
+    const show = (n) => { cur = (n + photos.length) % photos.length; lbImg.src = photos[cur].big; $(".lb-count", lb).textContent = `${cur + 1} / ${photos.length}`; };
+    const openLightbox = (n) => { show(n); lb.hidden = false; document.body.style.overflow = "hidden"; };
+    const closeLightbox = () => { lb.hidden = true; document.body.style.overflow = ""; };
+    $(".lb-close", lb).onclick = closeLightbox;
+    $(".lb-prev", lb).onclick = () => show(cur - 1);
+    $(".lb-next", lb).onclick = () => show(cur + 1);
+    lb.addEventListener("click", e => { if (e.target === lb) closeLightbox(); });
+    document.addEventListener("keydown", e => {
+      if (lb.hidden) return;
+      if (e.key === "Escape") closeLightbox();
+      else if (e.key === "ArrowLeft") show(cur - 1);
+      else if (e.key === "ArrowRight") show(cur + 1);
+    });
+
+    const route = () => {
+      const id = location.hash.slice(1);
+      const a = allAlbums.find(x => x.id === id);
+      a ? renderAlbum(a) : renderIndex();
+    };
+    window.addEventListener("hashchange", route);
+    route();
   }
 })();

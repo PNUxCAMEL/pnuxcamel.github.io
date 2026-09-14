@@ -8,6 +8,7 @@ Oopy(노션) 사이트의 내용을 그대로 옮긴 순수 HTML/CSS/JS 사이�
 ```
 index.html          홈 (소개, 사진 슬라이드, 영상, 뉴스)
 people.html         구성원
+research.html       연구 분야
 projects.html       프로젝트
 publications.html   논문
 gallery.html        갤러리
@@ -35,11 +36,13 @@ data/               ★ 내용은 전부 여기서 수정합니다
 - 홈 화면 슬라이드 사진과 유튜브 영상은 `index.html` 안에서 직접 바꿉니다.
 - 연락처는 `contact.html` 안에서 직접 바꿉니다.
 
-## ⚠️ Oopy 해지 전에 꼭 할 일
+## 갤러리 사진 관리
 
-`data/gallery.js`의 사진 중 `oopy.lazyrockets.com` 주소로 시작하는 것들은
-노션에 저장된 사진이라 **Oopy를 해지하면 안 보일 수 있습니다.**
-노션에서 사진을 내려받아 `camel-lab-images` 저장소에 올린 뒤 URL을 바꿔 주세요.
+갤러리 사진은 `camel-lab-images` 저장소의 `gallery/<앨범폴더>/` 안에 있습니다.
+- 사진 추가: 해당 앨범 폴더에 파일 업로드 → `data/gallery.js`의 그 앨범 `images` 목록에 파일명 추가
+- 앨범 추가: `gallery/` 아래 새 폴더 생성 → `gallery.js`에 앨범 한 덩어리 복사해서 채우기
+- 사진은 올리기 전에 긴 쪽 1920px 정도로 줄여 주세요 (PowerToys Image Resizer 등). 5MB 넘는 원본은 페이지가 느려집니다.
+- 처음 이전 절차는 `사진 업로드 안내.md` 참고.
 
 ## GitHub Pages로 무료 배포하기
 

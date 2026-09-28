@@ -359,6 +359,7 @@ window.GALLERY = [
               "image 6.png",
               "image 7.png",
               "image 8.png"
+              "260918_camel_openpath_team_photo.jpg"
             ]
           }
         ]

@@ -4,7 +4,11 @@
 // ============================================================
 window.PUBLICATIONS = [
   // ---------- International Conferences ----------
-  { type: "IC", id: "IC_09", year: 2026, title: "Res-IL: Residual QP-based Imitation Learning for Cooperative Bimanual Manipulation", venue: "International Conference on Advanced Intelligent Mechatronics (AIM)", authors: "Euichan Heo, Chansik Hwang, Jaehoon An, Donghyeok Park, Woosung Jung, Inho Lee*, et al." },
+  { type: "IC", id: "IC_13", year: 2026, title: "A Quadruped Wheeled Mobile Robot for Base-Levelness-Preserving Traversal of T-Bar Obstacles", venue: "IEEE International Conference on Automation Science and Engineering (CASE)", authors: "Minseong Kim, Hosun Kang, Jaehoon An, Jintae Kim, Chanwoo Jeong, TaeGeon Hwang, Gaseong Park, Inho Lee*, et al." },
+  { type: "IC", id: "IC_12", year: 2026, title: "OSBMC: An Optimization-based Operational Space Controller with Singularity Avoidance for Closed-Chain Dual-Arm Manipulation", venue: "IEEE International Conference on Automation Science and Engineering (CASE)", authors: "Jaehoon An, Jiwook Choi, Hyungjin Kim, Inho Lee*, et al." },
+  { type: "IC", id: "IC_11", year: 2026, title: "Res-IL: Residual QP-based Imitation Learning for Cooperative Bimanual Manipulation", venue: "International Conference on Advanced Intelligent Mechatronics (AIM)", authors: "Euichan Heo, Chansik Hwang, Jaehoon An, Donghyeok Park, Woosung Jung, Inho Lee*, et al." },
+  { type: "IC", id: "IC_10", year: 2025, title: "Multi-view Point Cloud Registration of Partially Overlapped Objects for Shoes Buffing Automation System", venue: "International Conference on Control, Automation and Systems (ICCAS)", authors: "Chansik Hwang, Inho Lee*, et al." },
+  { type: "IC", id: "IC_09", year: 2025, title: "Real-Time Inertial Parameter Identification for Software-Defined Robots.", venue: "International Conference on Control, Automation and Systems (ICCAS)", authors: "Jaehoon An, MinSeong Kim, Inho Lee*, et al." },
   { type: "IC", id: "IC_08", year: 2023, title: "Implementation of a Gait Phase Informed Sensorless Collision Detector for Legged Robots", venue: "20th International Conference on Ubiquitous Robots (UR)", authors: "Hyeonje Cha, Inho Lee*, et al." },
   { type: "IC", id: "IC_07", year: 2022, title: "Neural Network-based Ground Reaction Force Estimation in a Point-foot Robot", venue: "International Conference on Robot Intelligence Technology and Applications (RiTA)", authors: "Hyeonje Cha, Inho Lee*, et al." },
   { type: "IC", id: "IC_06", year: 2020, title: "Detecting Usable Planar Regions for Legged Robot Locomotion", venue: "International Conference on Intelligent Robots and Systems (IROS)", authors: "Sylvain Bertrand, Inho Lee*, et al." },
@@ -16,7 +20,7 @@ window.PUBLICATIONS = [
 
   // ---------- International Journals ----------
   { type: "IJ", id: "IJ_19", year: 2026, title: "Motion Control Framework for Interactive Robotic Guide Dogs: A Systems Perspective", venue: "IEEE Robotics and Automation Letters", authors: "Jiyun Kim, Dongyoung Lee, Yeongsu Choi, Inho Lee" },
-  { type: "IJ", id: "IJ_18", year: 2025, title: "AI and Digital Twin Federation based Flexible Safety Control for Human-Robot Collaborative Work Cell", venue: "IEEE Access", authors: "Ji Dong Choi, Seung-Hwan Choi, Min Young Kim, Inho Lee, Suwoong Lee, Byeong Hak Kim" },
+  { type: "IJ", id: "IJ_18", year: 2025, title: "AI and Digital Twin Federation based Flexible Safety Control for Human-Robot Collaborative Work Cell", venue: "IEEE Access", authors: "Ji Dong Choi, Seung-Hwan Choi, Min Young Kim, Inho Lee, Suwoong Lee, Byeong Hak Kim" }, // TODO : 확인 필요
   { type: "IJ", id: "IJ_17", year: 2025, title: "LIPCPM: A Novel Model for Anti-Sloshing and Stable Bipedal Robot Locomotion", venue: "IEEE Access", authors: "Hosun Kang, Jaehyung Park, Dongyoung Lee, Jungmin Lee, Inho Lee" },
   { type: "IJ", id: "IJ_16", year: 2024, title: "High-Speed Scooping Through Dynamic Manipulation: Model and Practice", venue: "IEEE Robotics and Automation Letters", authors: "Hyeonje Cha, Inho Lee, Jungwon Seo" },
   { type: "IJ", id: "IJ_15", year: 2024, title: "Anomaly Detection Based on Graph Convolutional Network–Variational Autoencoder Model Using Time-Series Vibration and Current Data", venue: "Mathematics, 3750", authors: "Seung-Hwan Choi, Dawn An, Inho Lee, Suwoong Lee" },

@@ -54,7 +54,7 @@ window.STUDENTS = [
   { name: "Jintae Kim",    degree: "M.S. course",  topics: ["Mechanical Design", "Soft Robotics"],                    email: "jintae2001@naver.com",    photo: IMG + "JintaeKim.png" + RAW },
   { name: "Seongjun Heo",  degree: "M.S. course",  topics: ["Imitation Learning", "Manipulation"],                    email: "timetravel1016@gmail.com",photo: IMG + "SeongjunHeo.jpg" + RAW },
   { name: "Sangwon Yi",    degree: "B.S. course",  topics: ["Reinforcement Learning", "Locomotion"],                  email: "yangbanpro@gmail.com",    photo: IMG + "SangwonYi.jpg" + RAW },
-  { name: "Minjeong Kang", degree: "B.S. course",  topics: ["Robot Control", "Reinforcement Learning"],               email: "kmjiss34@gmail.com",      photo: PLACEHOLDER },
+  { name: "Minjeong Kang", degree: "B.S. course",  topics: ["Robot Control", "Reinforcement Learning"],               email: "kmjiss34@gmail.com",      photo: IMG + "MinjeongKang.jpg" + RAW },
   { name: "Seungmin Lim",  degree: "B.S. course",  topics: ["Imitation Learning"],                                    email: "tmdals3086@naver.com",    photo: IMG + "SeungminLim.jpg" + RAW },
   { name: "Hyeongjun Cho", degree: "B.S. course",  topics: ["Imitation Learning", "Manipulation", "Locomotion"],      email: "whgudwns0921@naver.com",  photo: IMG + "HyeongjunCho.jpg" + RAW },
   { name: "Junje Hur",     degree: "B.S. course",  topics: ["Imitation Learning", "Manipulation"],                    email: "willy1517@naver.com",     photo: IMG + "JunjeHur.jpg" + RAW },

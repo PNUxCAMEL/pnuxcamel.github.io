@@ -519,7 +519,8 @@ window.GALLERY = [
               "image 4.png",
               "IMG_0149.jpg",
               "image 5.png",
-              "image 6.png"
+              "image 6.png",
+              "20260929_112551.jpg",
             ]
           }
         ]

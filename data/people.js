@@ -62,7 +62,7 @@ window.STUDENTS = [
 
 // 졸업생: photo가 없으면 기본 이미지(PLACEHOLDER)가 쓰입니다. employment는 비워도 됩니다.
 window.ALUMNI = [
-  { name: "Euichan Heo",     degree: "M.S.",  year: "2026", employment: "Openpath Robotics",                           photo: IMG + "EuichanHeo.png" + RAW },
+  { name: "Euichan Heo",     degree: "M.S.",  year: "2026", employment: "Openpath Robotics",                               photo: IMG + "EuichanHeo.png" + RAW },
   { name: "Dongju Kim",      degree: "M.S.",  year: "2026", employment: "Institute for Human & Machine Cognition (IHMC)",  photo: IMG + "DongjuKim.jpg" + RAW },
   { name: "Yeongsu Choi",    degree: "M.S.",  year: "2026", employment: "Openpath Robotics",                               photo: IMG + "YeongsooChoi.png" + RAW },
   { name: "Sangbum Son",     degree: "B.S.",  year: "2026", employment: "",                                                photo: IMG + "SangbeomSon.png" + RAW },
